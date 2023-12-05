@@ -1,21 +1,27 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Box, css } from "@chakra-ui/react";
 import "./App.css";
 import { Shipments } from "./components/Shipments";
+import { Header } from "./components/Header";
+
+const pageContainer = css({
+  width: "1124px",
+  margin: "0 auto",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: "1.25rem",
+  minHeight: "100%",
+  position: "relative",
+  overflow: "hidden",
+});
 
 function App() {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <Shipments />
+      <Header />
+      <Box css={pageContainer}>
+        <Shipments />
+      </Box>
     </>
   );
 }
