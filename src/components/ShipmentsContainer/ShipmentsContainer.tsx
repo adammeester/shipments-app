@@ -1,5 +1,5 @@
-import { ShipmentStatus } from "../ShipmentStatus";
-import { Shipment } from "../types";
+import { ShipmentStatus } from '../ShipmentStatus';
+import { Shipment } from '../types';
 import {
   Table,
   Thead,
@@ -10,69 +10,67 @@ import {
   css,
   Box,
   TableContainer,
-} from "@chakra-ui/react";
-import { UpDownIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+} from '@chakra-ui/react';
+import { UpDownIcon } from '@chakra-ui/icons';
 
 type ShipmentsContainerProps = {
   shipments: Array<Shipment>;
+  handleSortShipments: (field: 'trackingId' | 'status') => void;
+  handleViewShipment: (shipment: Shipment) => void;
 };
 
-enum SortOrder {
-  Unsorted = "unsorted",
-  Ascending = "asc",
-  Descending = "desc",
-}
-
 const shipmentCell = css({
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  gap: "0.5rem",
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '0.5rem',
 });
 
-const sortShipments = () => {};
-
-export const ShipmentsContainer = ({ shipments }: ShipmentsContainerProps) => {
-  const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.Unsorted);
-
-  const sortShipments = () => {
-    switch (sortOrder) {
-      case SortOrder.Unsorted:
-        setSortOrder(SortOrder.Ascending);
-        break;
-      case SortOrder.Ascending:
-        setSortOrder(SortOrder.Descending);
-        break;
-      case SortOrder.Descending:
-        setSortOrder(SortOrder.Unsorted);
-        break;
-    }
-  };
-  //TODO: change upDownIcon based on sort order
-
+export const ShipmentsContainer = ({
+  shipments,
+  handleSortShipments,
+  handleViewShipment,
+}: ShipmentsContainerProps) => {
   return (
-    <TableContainer borderRadius={"0.75rem"} background="white">
-      <Table variant={"simple"} columnGap={"1rem"}>
+    <TableContainer borderRadius={'0.75rem'} background='white'>
+      <Table variant={'simple'} columnGap={'1rem'}>
         <Thead>
-          <Tr>
-            <Th width="20%">
-              <Box css={shipmentCell} onClick={sortShipments}>
+          <Tr sx={{ cursor: 'pointer' }}>
+            <Th width='20%'>
+              <Box
+                css={shipmentCell}
+                onClick={() => handleSortShipments('trackingId')}
+              >
                 Shipment
                 <UpDownIcon />
               </Box>
             </Th>
-            <Th>Status</Th>
+            <Th>
+              <Box
+                sx={{ cursor: 'pointer' }}
+                css={shipmentCell}
+                onClick={() => handleSortShipments('status')}
+              >
+                Status
+                <UpDownIcon />
+              </Box>
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
-          {sortedShipments.map((shipment) => (
-            <Tr key={shipment.id}>
-              <Td>{shipment.trackingId}</Td>
-              <Td>
-                <ShipmentStatus status={shipment.status} />
-              </Td>
-            </Tr>
+          {shipments.map((shipment) => (
+            <>
+              <Tr
+                sx={{ cursor: 'pointer' }}
+                key={shipment.id}
+                onClick={() => handleViewShipment(shipment)}
+              >
+                <Td>{shipment.trackingId}</Td>
+                <Td>
+                  <ShipmentStatus status={shipment.status} />
+                </Td>
+              </Tr>
+            </>
           ))}
         </Tbody>
       </Table>

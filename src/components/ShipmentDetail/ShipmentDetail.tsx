@@ -1,29 +1,55 @@
 import {
-  Box,
   Button,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerHeader,
-  DrawerOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
+  css,
+} from '@chakra-ui/react';
+import { Shipment } from '../types';
+import { CloseIcon } from '@chakra-ui/icons';
+import { ShipmentInformation } from '../ShipmentInformation';
+import { TrackingHistory } from '../TrackingHistory';
 
-export const ShipmentDetail = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+type ShipmentDetailProps = {
+  shipment: Shipment;
+  isOpen: boolean;
+  onClose: () => void;
+};
 
+const closeButton = css({
+  backgroundColor: 'white',
+  border: '1px solid lightgrey',
+});
+
+const header = css({
+  fontWeight: '600',
+  fontSize: '1.5rem',
+  borderBottomWidth: '1px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+});
+
+export const ShipmentDetail = ({
+  shipment,
+  isOpen,
+  onClose,
+}: ShipmentDetailProps) => {
   return (
-    <Box>
-      <Button onClick={onOpen}>Open Drawer</Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Drawer Header</DrawerHeader>
-          <DrawerBody>
-            <div>This is the content of the drawer.</div>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </Box>
+    <Drawer isOpen={isOpen} size='md' placement='right' onClose={onClose}>
+      <DrawerContent>
+        <DrawerHeader css={header}>
+          {shipment?.trackingId}
+          <Button size={'sm'} onClick={onClose} css={closeButton}>
+            <CloseIcon fontSize={'0.5rem'} />
+          </Button>
+        </DrawerHeader>
+        <DrawerBody>
+          <ShipmentInformation {...shipment} />
+          <TrackingHistory history={shipment.history} />
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
   );
 };

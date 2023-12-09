@@ -1,1 +1,1 @@
-export { ShipmentStatus } from "./ShipmentStatus";
+export { ShipmentStatus } from './ShipmentStatus';
