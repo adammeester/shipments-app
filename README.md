@@ -2,8 +2,10 @@
 
 Using Vite/React, ApolloClient
 
-```
-To run, simply enter into a terminal
-npm run dev
+TODO: Fix unit tests
 
+```
+to run, simply enter
+npm i
+npm run dev
 ```
