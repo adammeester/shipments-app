@@ -49,7 +49,7 @@ describe('Shipments Component', () => {
       </MockedProvider>
     );
 
-    expect(screen.getByText('ABC123')).toBeInTheDocument();
-    expect(screen.getByText('XYZ789')).toBeInTheDocument();
+    expect(await screen.getByText('ABC123')).toBeInTheDocument();
+    expect(await screen.getByText('XYZ789')).toBeInTheDocument();
   });
 });
