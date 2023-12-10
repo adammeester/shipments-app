@@ -43,7 +43,7 @@ export const ShipmentInformation = ({
         </Tr>
         <Tr>
           <Td css={labelCell}>Delivered time</Td>
-          <Td css={valueCell}>{deliveredTime || 'N/A'}</Td>
+          <Td css={valueCell}>{formatDate(deliveredTime) || 'N/A'}</Td>
         </Tr>
         <Tr>
           <Td css={labelCell}>Delivery address</Td>
