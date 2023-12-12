@@ -2,13 +2,14 @@ export type Shipment = {
   id: string; // UUIDv4
   trackingId: string;
   status: ShipmentStatusType;
-  statusSeverity: 'Success' | 'Info' | 'Warning';
+  statusSeverity: StatusSeverity;
   deliveredTime: string; // ISO date
   lastUpdate: string; // ISO date
   deliveryAddress: string;
   totalTransit: string; // x days | x hours
-  history?: Array<TrackingHistoryType>;
 };
+
+export type StatusSeverity = 'Success' | 'Info' | 'Warning';
 
 export type ShipmentStatusType =
   | 'Delivered'
@@ -22,6 +23,9 @@ export type TrackingHistoryStatus =
   | 'Return to sender';
 
 export type TrackingHistoryType = {
+  id: string;
+  trackingId: string;
+  statusSeverity: StatusSeverity;
   location: string;
   status: TrackingHistoryStatus;
   timestamp: string;

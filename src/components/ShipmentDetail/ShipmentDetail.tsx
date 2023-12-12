@@ -6,7 +6,7 @@ import {
   DrawerHeader,
   css,
 } from '@chakra-ui/react';
-import { Shipment } from '../types';
+import { Shipment, TrackingHistoryType } from '../types';
 import { CloseIcon } from '@chakra-ui/icons';
 import { ShipmentInformation } from '../ShipmentInformation';
 import { TrackingHistory } from '../TrackingHistory';
@@ -36,6 +36,7 @@ export const ShipmentDetail = ({
   isOpen,
   onClose,
 }: ShipmentDetailProps) => {
+  const history = [] as Array<TrackingHistoryType>;
   return (
     <Drawer isOpen={isOpen} size='md' placement='right' onClose={onClose}>
       <DrawerContent>
@@ -47,7 +48,7 @@ export const ShipmentDetail = ({
         </DrawerHeader>
         <DrawerBody>
           <ShipmentInformation {...shipment} />
-          <TrackingHistory history={shipment.history} />
+          <TrackingHistory history={history} />
         </DrawerBody>
       </DrawerContent>
     </Drawer>
