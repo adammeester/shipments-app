@@ -1,6 +1,6 @@
 # Shipments App
 
-Using Vite/React, ApolloClient
+Using Vite/React, Chakra-ui and ApolloClient
 
 TODO: Fix unit tests
 
